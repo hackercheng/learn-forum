@@ -191,6 +191,8 @@ public class PostController {
         ThrowUtils.throwIf(size > 20, ErrorCode.PARAMS_ERROR);
         Page<Post> postPage = postService.page(new Page<>(current, size),
                 postService.getQueryWrapper(postQueryRequest));
+        Gson gson = new Gson();
+        log.info("result => {}",gson.toJson(postPage.getRecords()));
         return ResultUtils.success(postService.getPostVOPage(postPage, request));
     }
 

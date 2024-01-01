@@ -65,3 +65,21 @@ create table if not exists post_favour
     index idx_postId (postId),
     index idx_userId (userId)
 ) comment '帖子收藏';
+
+-- auto-generated definition
+create table tag
+(
+    id         bigint auto_increment comment 'id' primary key,
+    tagName    varchar(256)                       null comment '标签名称',
+    userId     bigint                             null comment '用户id',
+    parentId   bigint                             null comment '父标签id',
+    isParent   tinyint                            null comment '0 - 是、1 - 不是',
+    createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete   tinyint  default 0                 not null comment '是否删除',
+    constraint idx_userId
+        unique (userId),
+    constraint uniIdx_tagName
+        unique (tagName)
+)comment '标签';
+
